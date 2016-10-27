@@ -134,7 +134,7 @@ Template.camera.events({
     } else {
       closeAndCallback(new Meteor.Error("cancel", "Photo taking was cancelled."));
     }
-    
+
     if (stream) {
       stopStream(stream);
     }
@@ -184,7 +184,7 @@ MeteorCamera.getPicture = function (options, callback) {
   desiredWidth = options.width || 480;
 
   // Canvas#toDataURL takes the quality as a 0-1 value, not a percentage
-  quality = (options.quality || 49) / 100;
+  quality = (options.quality || 90) / 100;
 
   if (desiredHeight * 4 / 3 > desiredWidth) {
     canvasWidth = desiredHeight * 4 / 3;
@@ -198,14 +198,14 @@ MeteorCamera.getPicture = function (options, callback) {
   canvasHeight = Math.round(canvasHeight);
 
   var view;
-  
+
   closeAndCallback = function () {
     var originalArgs = arguments;
     UI.remove(view);
     photo.set(null);
     callback.apply(null, originalArgs);
   };
-  
+
   view = UI.renderWithData(Template.camera);
   UI.insert(view, document.body);
 };
